@@ -1,8 +1,8 @@
 \graphicspath{{Img/regrasping/}}
 
-\section{Regrasping a rope}
+\chapter{Regrasping a rope}
 
-    \subsection{Assignment}
+    \section{Assignment}
         The last use case concerns regrasping a piece of a rope from one gripper to the other.
 
         The proposed scenario is the following.  It starts with the left gripper holding one end of the rope. The right gripper is open and is positioned towards the left gripper (see Figure~\ref{fig:RegraspInit}).
@@ -23,7 +23,7 @@
         \label{fig:RegraspInit}
         \end{figure}
 
-    \subsection{Regrasping workflow}
+    \section{Regrasping workflow}
         In the following text, I use the definition of points shown in Figure~\ref{fig:GraspPoses} (front view). Points $P_{a,b,c}$ are connected with the left arm, while points $P_{1,2,3}$ are connected with the right arm. Point $P_0$ is used as the default point from which the rest of the points is calculated using the parameters $l$ and $h$, $l$ denotes the distance between the grippers and $h$ the length of the rope.
 
         \begin{figure}[h]
@@ -91,7 +91,7 @@
         \end{figure}
 
 
-    \subsection{Detecting the rope in the gripper} \label{sec:DetectingTheRope}
+    \section{Detecting the rope in the gripper} \label{sec:DetectingTheRope}
 
         The rope detection algorithm was originally tested on the rope R2 (white and twisted rope, see Table~\ref{table:AvailableRopes}). The left gripper holding the R2 rope was moved to point $P_b$ and the output of the proximity and light sensor placed in the right gripper was measured.
 
@@ -114,7 +114,7 @@
         \end{figure}
 
 
-    \subsection{Experiments}
+    \section{Experiments}
         I found out that the rope R2 is not suitable for the regrasping procedure. It did not become straight after it was regrasped, it was rather bent to one side. This behavior prevents the successful consecutive regrasping. For this reason, I decided to use a different rope (see Figure~\ref{fig:Regrasping}). To ensure that it becomes straight again, it has a weight on each end.
 
         I did not have to change the rope detection algorithm, it worked well for a thinner rope also. The only thing I had to adjust was to lower the threshold $r_0$ to 20, since the peak in the output of the proximity sensor became smaller.
@@ -128,5 +128,5 @@
 
         The procedure ran successfully for regrasping the rope from the right gripper to the left and back. It took \SI{34}{s}. The experiment was recorder on video that is called \textit{RegraspRope.mpg} and can be found on the attached CD.
 
-    \subsection{Discussion}
+    \section{Discussion}
         Although the robot managed to regrasp the rope successfully, a few additional features would have to be implemented in order to make the process continuous (i.e. to be able to regrasp the rope many times in a row). The point in which the upper gripper releases the rope should be moved a bit to the side. In this way, the rope would fall to a predictable side of the lower gripper. Thus, it would be possible to always unwrap the rope from the gripper by turning it by \SI{180}{\degree}. This does not happen in the present case, since the rope is released directly above the gripper and thus it is not predictable on which side of the gripper it falls down. 

@@ -1,8 +1,8 @@
 \graphicspath{{Img/SOTA/}}
 
-\section{State-of-the-art}
+\chapter{State-of-the-art}
 
-    \subsection{General}
+    \section{General}
 A tactile feedback is useful for perceiving and manipulating soft objects. Its usage dates back to at least 1987 when Stephen Buckley, USA published his PhD on planning and teaching compliant motion strategies \cite{Buckley1987Insertion}. He was for instance interested in scenarios, in which a robot holds a T-shaped piece that has to be inserted into a corresponding hole. He worked with a robotic arm capable of Cartesian motions, but not rotations. The robot arm was modeled as a damped spring. A method how to teach the robot the wanted motions was developed.
 
 Another example of the usage of the tactile feedback is a task where a human guides a robotic arm by hand. It was implemented at Weiss Robotics, Germany \cite{Weissrobotics} (see Figure~\ref{fig:CompliantMotion}, left side). Such scenario might be very useful in industry and other areas. A human can teach the robot a certain motion quickly without the need to specifically program it.
@@ -42,7 +42,7 @@ Another example of the usage of the tactile feedback is a task where a human gui
         \label{fig:RobotPancakes}
         \end{figure}
 
-    \subsection{Slingshot}
+    \section{Slingshot}
         As far as I know, nobody else has used a two-arm robot for experimenting with a slingshot.
         However, other scenarios have been explored.
 
@@ -60,8 +60,8 @@ Another example of the usage of the tactile feedback is a task where a human gui
 
         Finally, another scenario uses the principle of two fast rotating disk. When a projectile (in this case a ball) gets in between them, it is shot forwards. The realization was done by Team 5353, Fremont, USA \cite{TwoRotatingDisks}.
 
-    \subsection{Knot-tying}
-        
+    \section{Knot-tying}
+
         \begin{figure}[h]
         \includegraphics[width=0.5\textwidth]{PR2Knot.png}
         \centering
@@ -83,7 +83,7 @@ Another example of the usage of the tactile feedback is a task where a human gui
         \end{figure}
 
 
-    \subsection{Ribbon manipulation}
+    \section{Ribbon manipulation}
         To the best of my knowledge, nobody has used a two-arm robot for a manipulation with a modern gymnastic ribbon.
 
         \begin{figure}[h]
@@ -97,7 +97,7 @@ Another example of the usage of the tactile feedback is a task where a human gui
 
         Fast and repeatable motions are needed in the industry. The example of that is a demo made by ABB robotics \cite{CanChallengeVideo}.
 
-    \subsection{Grasping objects}
+    \section{Grasping objects}
         Robotic object grasping is a complex topic. It was studied for instance at Carnegie Mellon University, Pennsylvania, USA \cite{kazemi2012robust}. The authors showed in 2011 that in order to develop a robust grasping of relatively small objects such as pens, screwdriver, cellphones and hammers, the robotic fingers should come in touch and make use of the supporting surface.
 
         A Mobile Manipulator that is able to autonomously fetch an object lying on a flat surface was developed in 2010 at Georgia Institute of Technology \cite{jain2010assistive}. The aim is to improve the everyday life of elderly, injured or disabled people (see Figure~\ref{fig:AssistiveManipulator}). A tilting laser range finder is used to acquire 3D point cloud data around the surroundings of the object to be fetched.

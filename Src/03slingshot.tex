@@ -1,8 +1,8 @@
 \graphicspath{{Img/slingshot/}}
 
-\section{Slingshot}
+\chapter{Slingshot}
 
-\subsection{Assignment}
+\section{Assignment}
 The work performed in this thesis follows closely the work, which I did in the subject called ``Individual project''~\cite{PreDiplomaLejsekHlavac}, where I focused on exploring the possibilities of a robotic slingshot. Here I continue with developing a fully automated slingshot.
 	
 The goal is to implement the following shooting procedure. The right arm holds the projectile and the slingshot is attached to the left one.
@@ -14,9 +14,9 @@ The goal is to implement the following shooting procedure. The right arm holds t
 		\end{enumerate}	
 
 
-\subsection{Analysis}
+\section{Analysis}
 
-\subsubsection{Attaching the slingshot to the robot arm}		
+\subsection{Attaching the slingshot to the robot arm}		
 
 \begin{figure}[h]
 \includegraphics[width=0.35\textwidth]{slingshot_traditionalAdj.png}
@@ -37,7 +37,7 @@ The slingshot cannot be held in the gripper. If just a small force is exerted on
 			\end{figure}		
 	
 	
-		\subsubsection{Workflow of the shooting procedure} \label{subsec: traditional workflow}
+		\subsection{Workflow of the shooting procedure} \label{subsec: traditional workflow}
 The procedure for shooting projectiles using the slingshot is described by the finite state machine that is shown in Figure~\ref{fig: slingshot workflow}.
 			
 			\begin{figure}
@@ -78,13 +78,13 @@ The procedure for shooting projectiles using the slingshot is described by the f
 			\paragraph{Fire (D)}~\\
 				\indent The right arm moves backwards (D) until the desired force $ F_D$ is reached. Then the gripper opens and the projectile is released.
 
-		\subsubsection{Force/torque sensor}
+		\subsection{Force/torque sensor}
 			In order to implement projectile insertion, loading and firing, a force feedback is needed. There are two ATI Mini 45 force sensors placed in the wrist of each arm. The force sensor measures the force and torque simultaneously in three axes. Thus, it provides $F_{x, y, z}$ and $T_{x,y,z}$ at the maximum frequency of \SI{7,000}{Hz}. After the filtration of the outside disturbances (such as trams and light disturbances) and subtracting the weight of the gripper, the sensor provides the meaningful data at the frequency of \SI{12.5}{Hz}~\cite{KubesForceSensor}. I use the force measurements only.
 	
 	
-	\subsection{Experimental setting}
+	\section{Experimental setting}
 
-		\subsubsection{Shooting scene}
+		\subsection{Shooting scene}
 		
 			Figure~\ref{fig:shooting setting} shows two settings of the shooting with the slingshot. The left diagram shows the horizontal shooting, the right one the shooting upwards. The shooting parameters were $z_0 = $ \SI{1.9}{m}, $ d = $ \SI{1.85}{m}.
 			
@@ -102,7 +102,7 @@ The procedure for shooting projectiles using the slingshot is described by the f
 			\end{figure}
 			
 	
-		\subsubsection{Projectile}
+		\subsection{Projectile}
 			A bent piece of wire was chosen to be the projectile (see Figure~\ref{fig: projectile}) for the following reasons. Firstly, the gripper can hold it, even if a high force is exerted on it. Secondly, it is light and finally, because it has a low air resistance.
 
 			\begin{figure}[h]
@@ -121,7 +121,7 @@ E_p & = E_k \\[1ex]
 %
 \frac{1}{2}F \Delta x & = \frac{1}{2} m v_0^2 \nonumber \\[1ex]
 %
-v_0 & = \sqrt{\frac{F \Delta x}{m}} 
+v_0 & = \sqrt{\frac{F \Delta x}{m}}
 \label{eq: v0}
 \end{align}	
 			
@@ -134,16 +134,16 @@ v_0 & = \sqrt{\frac{F \Delta x}{m}}
 			\label{fig: shooting projectile}
 			\end{figure}
 
-	\subsection{Implementation}
+	\section{Implementation}
 
-		\subsubsection{Force feedback}	
+		\subsection{Force feedback}	
 
 			A key task is to use the force feedback. Force thresholds $F_B$ and $F_D$ are used to detect hitting the elastic string (B) and to detect reaching the firing position, respectively. In addition, the force threshold $F_{D0}$ is used to detect that the elastic string starts to be stretched. This information is used to compute the distance $\Delta x$.
 
-		\subsubsection{Traditional slingshot} \label{sec: implementation of slingshot 1.0}
+		\subsection{Traditional slingshot} \label{sec: implementation of slingshot 1.0}
 		The slingshot script version 1.0 is called the shooter. The usage of the force feedback is implemented incrementally. It means that the arm moves a certain distance (e.g. \SI{1}{cm}) and then the force data is retrieved and checked whether it exceeds a certain force threshold. If not, another step is performed and the whole procedure is repeated. It results in a bit jerky movement of the robotic arm.
 	
-	\subsection{Mathematical description}
+	\section{Mathematical description}
 	
 		The assumptions for the following mathematical description are the following.
 %		
@@ -153,7 +153,7 @@ v_0 & = \sqrt{\frac{F \Delta x}{m}}
 			\item It is assumed that the motion takes place in a homogeneous gravitational field.			
 \end{enumerate}	
 		
-		\subsubsection{Shooting horizontally}			
+		\subsection{Shooting horizontally}			
 			
 			Using the assumptions 1 and 2, the kinematics of the horizontal shooting is given by the two following Equations \eqref{eq: horizontal x} and \eqref{eq: horizontal z}. It is connected with the left side of Figure~\ref{fig:shooting setting}.
 		
@@ -176,7 +176,7 @@ v_0 & = \sqrt{\frac{F \Delta x}{m}}
 				z_1 = z_0 - \frac{1}{2}g t_1^2 = z_0 - \frac{g d^2}{2 v_0^2}
 			\end{equation}
 		
-		\subsubsection{Shooting upwards}
+		\subsection{Shooting upwards}
 		
 			The setting of the shooting upwards corresponds to the right side of the Figure~\ref{fig:shooting setting}. Its kinematics is given by Equations \eqref{eq: upwards x} and \eqref{eq: upwards z}.
 			
@@ -199,7 +199,7 @@ v_0 & = \sqrt{\frac{F \Delta x}{m}}
 			
 
 				
-	\subsection{Experiments with the traditional slingshot}
+	\section{Experiments with the traditional slingshot}
 	
 		\begin{figure}[h]
 		\centering
@@ -214,7 +214,7 @@ v_0 & = \sqrt{\frac{F \Delta x}{m}}
 		\label{fig:shooting string}
 		\end{figure}		
 	
-		\subsubsection{Shooting horizontally}
+		\subsection{Shooting horizontally}
 			The first shooting experiment was conducted with a completely straight tightened elastic string. Thus, $ \alpha = 0$ and the projectile was shot horizontally. Figure~\ref{fig:shooting string}	left shows the side view of the slingshot.
 			
 			The projectile was shot in the following setting: $ F_1 = $ \SI{4.4}{N}, $ \Delta x = $ \SI{0.05}{m}. The shot hit the wall at the height $ z_1 = $ \SI{0.5}{m}. Thus, the initial velocity $ v_{01d}$ was \SI{10.49}{ms^{-1}} according to Equation~\eqref{eq: v0}.
@@ -229,7 +229,7 @@ v_0 & = \sqrt{\frac{F \Delta x}{m}}
 			
 			Thus, there is a substantial difference (roughly three times) between the initial velocity $v_{01d}$ (calculation based on the parameters of the elastic string and its dynamics) and the initial velocity $v_{01k}$ (calculation based on the kinematics of the horizontal shooting). This suggests that the theoretical model does not fit with the reality.
 			
-		\subsubsection{Shooting upwards}
+		\subsection{Shooting upwards}
 			To make the shooting look as shooting and not as a ``piece of wire falling down'', $ \alpha$ was set to be higher than zero. I accomplished this by moving the elastic string a bit to the side (see Figure~\ref{fig:shooting setting} right). Parameters $ a = $ \SI{6}{cm} and $ c = $ \SI{6.1}{cm} yield:
 			\begin{equation}
 				\alpha = \arccos \left(\frac{a}{c} \right) \approx 10^{o}
@@ -277,7 +277,7 @@ v_0 & = \sqrt{\frac{F \Delta x}{m}}
 			A video called \textit{TraditionalSlingshot.mpg} was taken that shows the whole shooting procedure. It can be found on the attached CD.
 
 	
-	\subsection{Experiments with the flat slingshot}
+	\section{Experiments with the flat slingshot}
 		The previous experiments with the traditional slingshot had one problem. It was not possible to attach the traditional slingshot to the robot, so that it does not move while shooting. This behavior means that it is not possible to measure the shooting angle $\alpha$ properly and thus it is not possible to compare the measured results with the theoretical analysis.
 
 		Therefore, a new slingshot model was introduced -- ``flat slingshot'' (see Figure~\ref{fig:flat slingshot}). It is made from plank wood. Its sides are flat and thus it is possible to attach it tightly to the arm of the robot.
@@ -289,7 +289,7 @@ v_0 & = \sqrt{\frac{F \Delta x}{m}}
 		\label{fig:flat slingshot}
 		\end{figure}
 
-		\subsubsection{Changes to the traditional slingshot}
+		\subsection{Changes to the traditional slingshot}
 			The shooting procedure was changed a bit as well compared to the original one, see Section~\ref{subsec: traditional workflow}. The insertion of the projectile and moving to the shooting position was flipped.
 
 			Secondly, the implementation of loading and firing was changed, see Section~\ref{sec: implementation of slingshot 1.0}, as well. The motion of the robotic arm is no longer jerky as it was before. Now the arm does not move incrementally in \SI{1}{cm} steps and does not check the measured force value only after one step was performed.  The smooth movement was achieved. However, the speed of the robot is slowed down ten times and the movement and force checking for threshold values are performed simultaneously. When the desired stopping threshold is reached, i.e. the projectile touches the elastic string, the movement is stopped immediately.
@@ -313,7 +313,7 @@ v_0 & = \sqrt{\frac{F \Delta x}{m}}
 			\label{fig: shooting process 2.0}
 			\end{figure}
 
-		\subsubsection{Shooting at different shooting angles}
+		\subsection{Shooting at different shooting angles}
 			The three following experiment were performed with the flat slingshot. Five shots were fired for different shooting angles $ \alpha_{1} = $ \SI{0}{\degree}, $ \alpha_{2} = $ \SI{10}{\degree} and $ \alpha_{2} = $ \SI{20}{\degree}. The height $ z $, shooting force $F$ and $\Delta x$ were measured. Table \ref{table: exp alpha 0}, \ref{table: exp alpha 10} and \ref{table: exp alpha 20} show the measured results. The shooting force $F_0$ was set to \SI{3.7}{N}.
 
 
@@ -368,7 +368,7 @@ v_0 & = \sqrt{\frac{F \Delta x}{m}}
 			\label{table: exp alpha 20}
 			\end{table}
 
-		\subsubsection{Comparison with the theoretically calculated values}
+		\subsection{Comparison with the theoretically calculated values}
 
 			For each trial, a theoretical height $z_{t}$ was computed according to Equations \eqref{eq: horizontal z1} and \eqref{eq: upwards z1}. Then a difference $ \Delta z = z_{m} - z{t}$ was computed for each trial. Tables \ref{table: exp comparison 1}, \ref{table: exp comparison 2}, \ref{table: exp comparison 3} show the obtained results.
 			
@@ -444,14 +444,14 @@ v_0 & = \sqrt{\frac{F \Delta x}{m}}
 			\label{table: exp analysis}
 			\end{table}
 
-	\subsection{Discussion}
+	\section{Discussion}
 
-		\subsubsection{Traditional slingshot}
+		\subsection{Traditional slingshot}
 			The obtained results suggest that the theoretical model does not fit with the actual experiments. However, since it is not possible to attach the traditional slingshot tightly to the robotic arm, there is not much that can be done about it.
 
 			However, the experiments show that a certain repeatability is indeed reachable. Out of six shots fired with a given force and shooting angle, three hit the target hanging on the wall. I recorded the whole experiment on video called \textit{TraditionalSlingshot.mpg} that can be found on the attached CD.
 
-		\subsubsection{Flat slingshot}
+		\subsection{Flat slingshot}
 			The results suggest that there is a systematic error difference between the theoretical computed heights $z_t$ and actually measured values $z_m$. As the shooting angle $\alpha$ was gradually increased, the difference between the theoretical and measured values decreased to values close to zero.
 
 			The reason could be the fact that the projectile is not held ``horizontally'' in the left gripper, but slightly upwards. To compensate that the way the shooting angle is adjusted would have to change. It seems that it is not enough that the shooting angle is controlled only by the rotation of the left arm. The right one would have to turn accordingly as well. Another possibility would be to redesign the slingshot again. Instead of having the elastic string tightened vertically, it could be placed horizontally. The shooting angle would be then controlled solely by changing the position of the right arm.

@@ -1,8 +1,8 @@
 \graphicspath{{Img/tyer/}}
 
-\section{Knot tying}
+\chapter{Knot tying}
 
-    \subsection{Assignment} \label{sec:TheoreticalSolution}
+    \section{Assignment} \label{sec:TheoreticalSolution}
         The work done on knot tying follows the work performed in UC Berkeley, USA. I also follow up on my own work performed in the previous semester \cite{PreDiplomaLejsekHlavac}.
 
         The goal is to be able to tie a simple overhand knot (see Figure~\ref{fig: over hand knot}) in the air. The procedure should be fully automated.
@@ -28,9 +28,9 @@
         \end{enumerate}
 
 
-    \subsection{Experimental setting}
+    \section{Experimental setting}
 
-        \subsubsection{Available Ropes} \label{sec:AvailableRopes}
+        \subsection{Available Ropes} \label{sec:AvailableRopes}
             I bought six \SI{2}{m} long rope segments of different colors made from different materials (see Figure~\ref{fig:AvailableRopes}). The ropes are numbered from left to right. Table~\ref{table:AvailableRopes} shows their properties. The \emph{twisted} rope is made of a three strands, the \emph{braided} rope has a braided tubular jacket over strands of fiber and the \emph{kernmantled} rope has a kern covered with a braided tubular jacket.
 
             \begin{figure}
@@ -56,21 +56,21 @@
             \end{table}
 
 
-        \subsubsection{Examining the Asus Kinect sensor}
+        \subsection{Examining the Asus Kinect sensor}
             Kinect sensor provides the point cloud, i.e. the distance measurements from the observer's point of view. Kinect sends messages at an average rate of \SI{4}{Hz}. The message is an array of size 640 x 480 x 6. It resembles an image that contains information about color (RGB) and $x$, $y$ and $z$-coordinate of the given point in every pixel. Thus a depth image is obtained from the point cloud just by taking the $z$-coordinate. Furthermore, if a certain point is found in the RGB image (e.g. rope end), its coordinates in the camera coordinate system are known immediately.
 
-    \subsection{Theoretical analysis}
+    \section{Theoretical analysis}
 
-        \subsubsection{Used sensors}
+        \subsection{Used sensors}
             To be able to follow the tying procedure (see Section~\ref{enu:TheoreticalSolution}), several sensors have to be used. In order to detect the rope end visually, the Kinect sensor is needed. To fasten the knot, the force feedback from the force/torque sensor is needed.
 
-        \subsubsection{Rope requirements}
+        \subsection{Rope requirements}
             The rope should be rather thick. Firstly, it is then easier to detect it in the depth image provided by the Kinect sensor. Secondly, it is less probable that a thicker rope gets stuck on the left arm while fastening the knot. On the other hand, the rope should not be thicker than \SI{42}{mm} which is the maximum pitch of the robot gripper.
 
 
-    \subsection{Learning from a human example}
+    \section{Learning from a human example}
 
-        \subsubsection{Task assignment}
+        \subsection{Task assignment}
             In order to test the theoretical solution proposed in Section~\ref{sec:TheoreticalSolution}, I asked two subjects (A -- sees well, B -- is blind) to tie an overhand knot on a rope. The hypothesis is that both subjects would use fingers to tie a knot at first. When only two fingers are allowed, they would come up with a similar solution as I did -- wrapping the rope around the second arm. Subject B would primarily rely on the tactile feedback to recatch the rope while subject A would primarily rely on the visual feedback. I also hypothesized that subject B would spend a lot more time analyzing the properties of the rope, e.g. its stiffness. To simulate the robotic hands even better, two scenarios will be used. In the first one, the subjects could use two fingers only and in the second one they will have to use pliers to manipulate with the rope. The following list summarizes all aforementioned scenarios.
 %
             \begin{enumerate}\itemsep0pt
@@ -79,7 +79,7 @@
                 \item Tie the knot using pliers. \label{it: pliers}
             \end{enumerate}
 
-        \subsubsection{Observing how a normally seeing and a blind person ties a knot}
+        \subsection{Observing how a normally seeing and a blind person ties a knot}
 
             The whole experiment was recorded on a video called \textit{SubjectAB.mpg} that can be found on the attached CD.
 
@@ -121,7 +121,7 @@
                 \end{figure}
 
 
-        \subsubsection{Discussing the observed behavior}
+        \subsection{Discussing the observed behavior}
             As expected, Subject A was generally faster in tying the knot than Subject B. However, subject B was able to came up with solutions that I could not imagine. It proved that subject B would not be replaceable by a normally seeing person who would only close his eyes.
 
             Both subjects had a lot more problems to tie the knot using two fingers only than using pliers. I think it is because of the fact that they both already worked with pliers before and thus were accustomed to using them. However, to work with two fingers only was something completely new to them.
@@ -131,7 +131,7 @@
             Finally, I had to mention that the \SI{2}{m} long rope segment is well suited for the \CloPeMa\/ robot, but it is too long to be worked with for a human.
 
 
-        \subsubsection{Implications for the robotic knot-tying}
+        \subsection{Implications for the robotic knot-tying}
             The \CloPeMa\/ robot is in a way similar to Subject B. Although it can use visual feedback, it is slow, because it takes a lot of time to process it.
 
             Based on the observation of the behavior of Subject B, I came up with the following guidelines for tying the knot programmatically.
@@ -145,9 +145,9 @@
 
             \end{itemize}
 
-    \subsection{Finding rope end}
+    \section{Finding rope end}
 
-        \subsubsection{Segmentation methods}
+        \subsection{Segmentation methods}
 
             The main task of the knot-tying procedure is to find the previously released rope end again. I decided to use the visual information for this purpose.
 
@@ -165,7 +165,7 @@
 
             Finally, the Case \ref{it: depth} uses the depth image to segment the rope. It is possible to get an estimate of how far the rope is from the camera from the positions of the arms of the robot. There are normally no other objects around this distance as no person can come close to the robot when it moves. Furthermore, the available ropes are thick enough to be seen in the depth image. For these reasons, I decided to implement rope segmentation based on the depth image.
 
-        \subsubsection{Implementation of the detection algorithm}
+        \subsection{Implementation of the detection algorithm}
 
             \begin{figure}
                 \centering
@@ -235,7 +235,7 @@
                 \end{algorithmic}
             \end{algorithm}
 
-        \subsubsection{Testing the detection algorithm}
+        \subsection{Testing the detection algorithm}
 
             First, I analyzed the algorithm for finding connected components and experimentally estimated the parameter width $w$. The results below are from analyzing the recorded rosbag with data from working with the red rope.
 
@@ -265,7 +265,7 @@
 
 
 
-        \subsubsection{Experimental results}
+        \subsection{Experimental results}
 
             Figure~\ref{fig:RopeEndDetection} shows the results of the detection algorithm. The first image shows the segmentation of the rope in the depth image based on the guessed rope distance $d_r$. The second image shows the first connected component $C_1$ and the third image shows the second connected component $C_2$. In our case, $C_1$ is bigger in size (the amount of pixels) than~$C_2$, so~$C_1$ is considered to be the rope loop and $C_2$ the rope end. The tip of the rope end $P_{rt}$ is denoted by a green dot in the fourth image.
 
@@ -292,7 +292,7 @@
             \end{figure}
 
 
-    \subsection{Knot-tying procedure}
+    \section{Knot-tying procedure}
 
 
         Based on the theoretical analysis, a work flow of the knot-tying procedure was designed (see Figure~\ref{fig:TyerWorkflow}). Below is a more detailed description of the states of the knot-tying procedure. A diagram connected with each state is shown in Figure~\ref{fig:TyerStates} and Figure~\ref{fig:TyerTighten}.
@@ -316,7 +316,7 @@
             &
             \includegraphics[width=0.4\textwidth]{04Catch.png} \\
             3 & 4 \\
-            
+
             \end{tabular}
             \caption{1: INIT, 2: WRAP, 3: GET IMAGE, 4: CATCH.}
             \label{fig:TyerStates}
@@ -347,8 +347,8 @@
         \paragraph{TIGHTEN}~\\
         \noindent After the rope end is caught, both arms move to poses $P_T$ and $P_0$. The left arm then moves to pose $P_2$ to help the rope loop slide down of the robot arm . Finally, both arms start slowly moving from each other to poses $P_U$ and $P_3$ (see Figure~\ref{fig:TyerTighten}). The magnitude of the $z$-coordinate of the force from the right force sensor $F_z$ is measured. If the measured force exceeds the experimentally estimated threshold $F_{thresh} = \SI{10}{N}$ (meaning that the knot is already tightened), the motion of both arms is stopped.
 
-      
-    \subsection{Experiments}
+
+    \section{Experiments}
         I tested the developed knot-tying script on ropes R1-5 (see Table~\ref{table:AvailableRopes}). Since R6 is flat and thus it is hard to detect it in the depth image, it was omitted from the experiments.
 
         I also changed the width parameter $w$ to 10. I did it due to further experiments with the red rope. Sometimes the rope end and rope loop were very close to each other. If $w=15$, both connected components merged into one and the rope end detection was not possible.
@@ -400,12 +400,12 @@
             \label{fig:R2R3failure}
         \end{figure}
 
-    \subsection{Discussion}
+    \section{Discussion}
         It turned out that the proposed solution is mainly successful for non-white and non-twisted ropes. The rope should not be flat, but should also not be thicker than the gripper pitch.
 
         If the rope is white, the obtained segmentation in the depth image has huge gaps between the many connected components (see Figure~\ref{fig:R2R3failure}). Thus, the precondition that the segmentation should contain only two connected components is violated and the rope end detection fails.
 
         The twisted ropes not only cause the same problems during rope end detection as the white ones, but they also tend to get stuck on the robot arm.
-        
+
         The mentioned issues relate to image segmentation. I used a simple segmentation algorithm because the image segmentation is an unsolved problem. Image segmentation is the object of the intensive research by others.
 

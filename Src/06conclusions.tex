@@ -1,7 +1,7 @@
-\section{Conclusions}
-    In the course of working on the master thesis, I implemented four use case scenarios. The feedback from the various sensors of the two arm \CloPeMa\/ robot is used to accomplish tasks that involve perception and manipulation with soft objects.    
+\chapter{Conclusions}
+    In the course of working on the master thesis, I implemented four use case scenarios. The feedback from the various sensors of the two arm \CloPeMa\/ robot is used to accomplish tasks that involve perception and manipulation with soft objects.
 
-    \subsection{Slingshot}
+    \section{Slingshot}
 
         \begin{figure}[h]
             \centering
@@ -34,7 +34,7 @@
         Further work could involve connecting the shooting procedure with an automatic target recognition using for instance the Kinect sensor. The parameters of the shooting such as the shooting angle and the force with which the projectile is shot would then be computed automatically so that the projectile hits the target. In order to achieve such functionality, the slingshot would have to be redesigned further. For instance, the elastic string should be made of a different material so that the force changes gradually with its stretch and not sharply as it is the case of the present elastic string.
 
 
-    \subsection{Knot-tying}
+    \section{Knot-tying}
         I successfully implemented a fully automated knot-tying procedure. I tested the proposed knot-tying sequence on two persons (see Figure~\ref{fig:ABExamples}); one that sees normally (subject A) and one that is blind (subject B). I made conclusions for the robotic knot-tying based on the observed behavior of the two subjects. I especially focused on the blind subject, because his movements resemble in a way the movements of the  \CloPeMa\/ robot more closely than the movements of the normally seeing subject.
 
         \begin{figure}[h]
@@ -68,7 +68,7 @@
 
         Further work could focus on making the rope end detection better. First, the code involving image processing could be made faster by for instance rewriting the Python code into \Cplusplus. Second, the information about the color of the rope could be combined with the depth information to improve the rope segmentation procedure. In addition, further work could focus on distinguishing the case when the rope end was successfully caught from the case when it was not. The finding of the rope end and the catching of it could be then repeated if necessary.
 
-    \subsection{Ribbon manipulation}
+    \section{Ribbon manipulation}
         Based on the observation of a human rhythmic gymnast, I developed a procedure that allows the \CloPeMa\/ robot to catch a swinging pole hanging on a ribbon. The task involves mathematical modeling of the swinging pole and ribbon and exploring the capabilities of the gripper such as its maximum closing speed. The light and proximity sensors placed in the robot gripper were used to detect the presence of the pole and to determine whether the pole was caught well or not. Figure~\ref{fig:HumanAndRobotGymnastPoleCatch}, left side shows the human rhythmic gymnast that caught a swinging pole and Figure~\ref{fig:HumanAndRobotGymnastPoleCatch}, right side shows the \CloPeMa\/ robot performing the same.
 
         \begin{figure}[h]
@@ -101,7 +101,7 @@
 
         However, the fact that the maximum speed of the robot is limited to 20\% when it is operated through ROS does not allow the ribbon to be swung fast enough to form a visually nice shape. The results obtained when operating the robot through a teach pendant (thus reaching the maximum robot speed) were better. Yet operating the robot at its maximum speed in an unskilled manner for longer periods of time might cause damage.
 
-    \subsection{Regrasping a rope}
+    \section{Regrasping a rope}
         I successfully designed a scenario in which the \CloPeMa\/ robot regrasps a rope from one gripper to the other and back. The procedure is fully automated. The proximity sensor is used to detect the presence of the rope in the gripper. To make the rope detection process more robust so that it can handle ropes of different thickness, the gripper closes when a peak in the output of the proximity sensor passes (I do not use a simple thresholding).
 
         The regrasping procedure was recorded in the video that is called \textit{RegraspRope.mpg} and can be found on the attached CD. I have also taken a few screen shots from the procedure to illustrate it better. They are shown in Figure~\ref{fig:RegraspingProcess}.
@@ -131,7 +131,7 @@
 
         Further work could improve the release of the rope. The present solution does not allow regrasping of the rope many times (see the difference between 1 and 6 in Figure~\ref{fig:RegraspingProcess}), since it is not sure on which side of the gripper the rope falls down. Therefore, it is not possible to ensure that the rope is unwrapped correctly. This issue can be solved by avoiding the release of the rope directly above the lower gripper. The rope should be released a bit to the side, so that it falls to a predictable side of the lower gripper.
 
-    \subsection{Documentation of the developed code}
+    \section{Documentation of the developed code}
         I made a documentation of the code that I wrote. The full version in HTML (see screen-shot in Figure~\ref{fig:DocHTML}) and pdf can be found on the attached CD.
 
         \begin{figure}[h!]

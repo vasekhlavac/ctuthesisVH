@@ -1,8 +1,8 @@
 \graphicspath{{Img/ribbon/}}
 
-\section{Ribbon manipulation}
+\chapter{Ribbon manipulation}
 
-    \subsection{Assignment}
+    \section{Assignment}
         The manipulation with the rhythmic gymnastics ribbon was chosen to demonstrate the dynamic motion combined with the visual/tactile perception on the \CloPeMa\/ robotic testbed.
 
         A common task for a human rhythmic gymnast is to swing the metallic pole hanging on a ribbon with one hand and catch it with the other hand (see Figure~\ref{fig:HumanGymnast}, the left side). Another rhythmic gymnast task is fast back and forth movements causing the ribbon to form spirals and other shapes that are nice to watch (see Figure~\ref{fig:HumanGymnast}, the right side).
@@ -20,7 +20,7 @@
             \label{fig:HumanGymnast}
         \end{figure}
 
-        
+
 
        \CloPeMa\/ ``robot rhythmic gymnast'' should perform a similar scenario that is defined to be the following. It starts from the state, in which the robot holds the pole hanging on the ribbon in its left gripper.
 %
@@ -33,10 +33,10 @@
        \end{enumerate}
 
 
-    \subsection{Analysis}
+    \section{Analysis}
         In order to fulfill the proposed scenario given in Section~\ref{enu:InformalAssignment}, I had to check a few capabilities of the \CloPeMa\/ robot.
 
-        \subsubsection{Available sensors in the gripper}
+        \subsection{Available sensors in the gripper}
             The gripper contains tactile, light, magnetic and proximity sensor in its tip $T$ \cite{SalanskyGripper}.
 
             \begin{figure}[h]
@@ -46,7 +46,7 @@
             \label{fig:GripperDesc}
             \end{figure}
 
-        \subsubsection{Verifying the ability to catch the swinging pole}
+        \subsection{Verifying the ability to catch the swinging pole}
 
             I decided to use the light sensor to detect the swinging pole. The output of the light sensor, the relative intensity $h$, goes up as the pole approaches it. If the pole swings with the gripper positioned at the turning point of the swinging motion, two peaks appear at the output of the light sensor. The first one appears when the pole passes the tip $T$ of the gripper on its way inside and the second one on its way out (see Figure~\ref{fig:GripperDesc}). The threshold for detecting the pole was set to $h = 30$. The time between the two peaks was measured. Figure~\ref{fig:SwingMeasurement} shows the obtained results. The total time during which the pole was inside the gripper was estimated to be $t_p = \SI{520}{ms}$.
 
@@ -58,7 +58,7 @@
             \label{fig:SwingMeasurement}
             \end{figure}
 
-        \subsubsection{Gripper closing speed}
+        \subsection{Gripper closing speed}
             In order to catch a swinging pole on a ribbon, the capabilities of the gripper have to be explored.
 
             To control how much the gripper opens, parameter $n$ is introduced. It controls the gripper on a percentage like basis: $n=100$ for a fully closed gripper and $n=0$ for a fully opened gripper.
@@ -80,15 +80,15 @@
 
             To be able to catch the pole, the gripper cannot be fully opened as it cannot close fast enough. The gripper has to be only half opened to be able to catch the pole.
 
-        \subsubsection{Maximal speed of the \CloPeMa\/ robot}
+        \subsection{Maximal speed of the \CloPeMa\/ robot}
             The experiments performed to determine the maximum speed of the robot are described in~\cite{WagnerMaxRobotSpeed}. The robot can move faster if the executed trajectory has a low control point density.
 
             The \CloPeMa\/ testbed robot moves the fastest when it is operated directly through its control system on a trajectories taught in by a teach pendant. If the robot is managed by a program through ROS, its speed is limited to 20\% of its maximum speed at the level of the robot control system. For this reason, the following experiments were performed directly on trajectories taught in by the \CloPeMa\/ researcher Libor Wagner. Firstly, the robot had to perform a back and forth motion along a straight line in a general direction in 3D space (i.e. involving the motion of many robot joints simultaneously) at its maximum speed while holding the pole and the ribbon. The result was that the whole robot started shaking considerably due to the huge changes in acceleration. For this reason, for performing fast motions I decided to move the robotic arm using only one (and preferably the last) joint to reduce the motion impact on the whole construction.
 
             The conclusion is that the needed fast motions (to swing the pole and to make fast motions with the ribbon) will be performed using one joint only. In addition, to perform back and forth motions only the start and end point of the trajectory will be used to reduce the point density. The resulting motions are thus arcs.
 
-    \subsection{Robotic rhythmic gymnast}
-        \subsubsection{Equipment}
+    \section{Robotic rhythmic gymnast}
+        \subsection{Equipment}
             I had a \SI{6}{m} long gymnastic ribbon (see Figure~\ref{fig:GymnasticRibbon}) and two gymnastic poles  at my disposal. The blue pole is shown in Figure~\ref{fig:GymnasticPoles}, left side  and the white pole in Figure~\ref{fig:GymnasticPoles}, right side. The properties (length $d$, weight $m$ and diameter $\phi$) of the gymnastic poles are shown in Table~\ref{table:PoleProperties}. The diameter $\phi$ is measured at the point where the pole is grasped by the right gripper.
 
             \begin{figure}[h]
@@ -126,7 +126,7 @@
             \end{table}
 
 
-        \subsubsection{Experimental setup}
+        \subsection{Experimental setup}
             The system consists of the end of the robot arm (left one), the ribbon and the pole (see Figure~\ref{fig:PoleInit}).
 
             Based on the given assignment in Section~\ref{enu:InformalAssignment} I designed a flow chart (see Figure~\ref{fig:Workflow}). It is explained below. I estimated the swinging angles $\alpha$ and $\theta$, catching threshold $h_{catch}$ and recatching threshold $r_{recatch}$ experimentally.
@@ -188,7 +188,7 @@
             \end{figure}
 
 
-        \subsubsection{Mathematical description of the swinging pole}
+        \subsection{Mathematical description of the swinging pole}
 
             My first idea was to describe the whole system mathematically as a double pendulum and then solve the appropriate differential equations. After that, I thought I would use the control theory to compute the motion of the left robot arm that will cause the maximum swinging amplitude of the pole hanging on the ribbon. However, after I finally came up with the system description using the Lagrange formalism, I realized that this approach is too complicated.
 
@@ -207,7 +207,7 @@
             I assumed that the swinging pole and ribbon resemble the mathematical pendulum (no damping, no air resistance, the whole mass concentrated only at the tip of the pendulum as a point mass, only small angle oscillations etc.). Thus, to achieve resonance and hence a maximal amplitude of the forced oscillations, the driving period of the robotic arm $T_r$ has to equal $T_0$.
 
 
-        \subsubsection{Experiments}
+        \subsection{Experiments}
             Based on the designed workflow (see Figure~\ref{fig:Workflow}), I made a video with two different gymnastic poles -- the white one and the blue one. It is called \textit{Gymnastics.mpg} and can be found on the attached CD. The end of the blue pole was wrapped in tape so that it is easier for a human to hold it and it was thicker than the end of the white pole.
 
             Although the swinging ribbon and the pole break almost all the assumptions connected with the mathematical pendulum, the experiments with the real swinging pole and ribbon show that the maximal amplitude increases as the period of the driving oscillations $T_r$ approaches $T_0$. Furthermore, the driving oscillations are applied in a way that the whole pendulum is swung by its end.
@@ -223,7 +223,7 @@
 
 
 
-        \subsubsection{Discussion}
+        \subsection{Discussion}
             The success rate of the pole catching depends on how the ribbon is held by the left arm. Since the gymnastic ribbon is \SI{6}{m} long it has to be folded so that the left gripper can hold it. However, the position of the plane in which the ribbon and pole will swing later greatly depends on how the gripper holds it. For this reason, the correct catching position of the right gripper has to be adjusted manually every time the ribbon is placed into the left gripper. However, once the catching position is properly adjusted, the success pole catching rate is > 90\%.
 
             In approximately 90\% of the cases the pole is caught inside the gripper and has to be recaught. In approximately 10\% of the cases the pole is caught well.
