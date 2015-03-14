@@ -1,0 +1,127 @@
+\graphicspath{{Img/intro/}}
+
+\section{Introduction}
+
+    \subsection{Motivation}
+        Various robots and robotic production lines are used in industry and in other fields on a daily basis. However, in most cases, they are either teleoperated or programmed to repeat a previously learned motion. These robots have mostly a single arm. In case the robots and robotic applications are autonomous, the most widely used sense is the vision.
+
+        However, things are beginning to change. In the article titled ``My boss the Robot'' \cite{bourne13}, David Bourne writes about the future of robots in industry. He points out that the time when robots operated in isolated cells repeating a certain motion over and over might soon change. Since humans and robots are best at different tasks (e.g. complex manipulation and precise welding), it would be very smart to efficiently combine their skills. For that reason, robots and humans would have to work side by side collaborating on a given task. In these cases, the robot has to use a variety of sensors to sense its human colleague. And this is just one of the points where different kinds of feedback other than visual come into play.
+
+        I personally find it very exciting to develop a new sense for the robots -- the tactile sensing that mimics the human sense of touch. Since the time the visual feedback has been introduced, the robots have been able to accomplish many more tasks. The same promises the introduction of the tactile feedback. It involves tasks ranging from robotic surgeons up to automated manipulation with clothes.
+
+        The \CloPeMa\/ project aims at advancing the state-of-the-art in such areas. My work is focused at using the tactile, kinesthetic and visual feedback in different tasks such as automated knot-tying and demonstrating their functionality.
+
+    \subsection{\CloPeMa\/ project context}
+
+        The project context description is taken from a report that I created in the previous semester~\cite{PreDiplomaLejsekHlavac}.
+
+
+        \CloPeMa\/ is a three year European Commission funded research project in the Framework Program~7, which advances the state of the art in the autonomous perception and manipulation of soft materials such as fabrics, textiles and garments. \CloPeMa\/ runs  between February 2012 and January 2015. There are five partners cooperating in the project (from Greece, Italy, Scotland and two partners from the Czech Republic). \CloPeMa\/ test-bed utilizes a dual-arm robot based on the industrial welding arm Motoman 1400. \CloPeMa\/ modules are integrated on top of Robotic Operating System (ROS).
+
+        \begin{figure}[h]
+        \centering
+        \begin{tabular}{cc}
+        \includegraphics[width=0.57\textwidth]{tshirt02.png}
+        %
+        &
+        %
+        \includegraphics[width=0.39\textwidth]{CloPeMaForceTorqueSensorSmAnnotatedCrop}
+        \end{tabular}
+        \caption{Left: \CloPeMa\/ project dual-arm robot manipulating a T-shirt. Right: The force /~torque sensor Mini45 ATI mounted on \CloPeMa\/ robot.}
+        \label{fig:CloPeMaRobot-and-FTsensor}
+        \end{figure}
+
+        In the run of \CloPeMa\/ project, a force compliant 13-DOF dual-arm robot formed by two industrial arms Motoman 1400 has been implemented and equipped with two off-the-shelf force/torque sensors (ATI-Mini45) in between the last joint and the gripper, see Figure~\ref{fig:CloPeMaRobot-and-FTsensor}, right side. Each arm hosts a custom build sensorized gripper with actively controlled compliance capable of rubbing motions of the fingers.
+
+        \CloPeMa\/ test-bed is rich in sensors. The sensor setup is formed by: the Kinect-like sensor ASUS Xtion on both forearms, the precise optical stereo on the central pole (formed by two SLR Nikon cameras); the gripper hosts a photometric stereo camera in the palm of the gripper, and is equipped with the 16-elements capacitive tactile sensor in the gripper finger. The view of the \CloPeMa\/ system folding a T-shirt is in Figure~\ref{fig:CloPeMaRobot-and-FTsensor}, left side.
+
+        \begin{figure}[h]
+        \centering
+        \begin{tabular}{cc}
+        \includegraphics[width=0.48\textwidth]{CloPeMaGripperEntireView1Sm}
+        %
+        &
+        %
+        \includegraphics[width=0.48\textwidth]{CloPeMaGripperTactileSensorSm}
+        \end{tabular}
+        \caption{Left: The \CloPeMa\/ hand with variable stiffness and tactile sensor. Right: Detail of the hand tip with the tactile sensor.}
+        \label{fig:CloPeMaHand}
+        \end{figure}
+
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{CloPeMaGripperHydraulicsSm}
+        \caption{Gripper hydraulics controller box.}
+        \label{fig:CloPeMaHandHydraulics}
+        \end{figure}
+
+        The gripper has a controllable impedance by involving hydraulics and air bubbles injected into the hydraulic oil. The hydraulic actuator is visible in Figure~\ref{fig:CloPeMaHand} left side. The gripper has a capacitive 16 texels tactile sensor in the upper finger in Figure~\ref{fig:CloPeMaHand}, right side. The source of hydraulic energy is placed on the arm of the robot farther from the gripper, see Figure~\ref{fig:CloPeMaHandHydraulics}.
+
+        \CloPeMa\/ project inheritance is also in established integration procedures on top of Robotic Operating System (ROS), software design practices in  \Cplusplus\/ and Python, established project management support using Redmine tool, etc.
+
+    \subsection{Goals of the thesis}
+    Based on the given thesis assignment, I specified my own assignment for each of the given tasks more in detail.
+
+        \subsubsection{Slingshot}
+        The aim is to explore the possibilities of the compliant motion and the force feedback. The force sensor will be used mainly. The goal is to design an automated slingshot and to find out whether an automated procedure for hitting a standing target can be developed. I came up with the following scenario:
+            \begin{enumerate}
+                \item Develop an automated slingshot.
+%
+                \begin{enumerate}
+                    \item Initial position: one robot arm holds the slingshot, the other arm holds the projectile.
+                    \item Load the projectile.
+                    \item Stretch the elastic string of the slingshot so that it exerts the given force on the projectile.
+                    \item Shoot the projectile at a given shooting angle.
+                \end{enumerate}
+%
+                \item Compare the theoretical analysis of the shooting (i.e. which point should be hit by the projectile based on its initial speed, shooting angle etc.) with the actual experiments.
+            \end{enumerate}
+
+
+        \subsubsection{Knot-tying}
+            The goal is to tie an overhand knot in the air using the two-arm robot. Various sensors might be used, for instance Xtion kinect and the force sensor.
+
+            I came up with the following solution to the knot tying problem. The robot is already holding the rope in both grippers at the beginning of the proposed procedure.
+%
+            \begin{enumerate}
+                \item Wrap the rope around the left arm in a way that a loop is created.
+                \item Release the rope end with the right arm and move the right arm away.
+                \item Turn the left arm so that the left camera sees the loop and the rope end.
+                \item Detect the rope end and catch it with the right arm.
+                \item Tighten the knot using both arms.
+            \end{enumerate}
+
+        \subsubsection{Ribbon manipulation}
+            I chose a manipulation with the rhythmic gymnastic ribbon and pole to be the third task. The aim of it is to mimic a few capabilities of a human rhythmic gymnast. I am especially interested in tasks that involve dynamics and in investigating the capabilities of the robot grippers.
+
+            I proposed a following scenario. At the beginning, the robot is holding the pole hanging on a ribbon in its left gripper.
+%
+            \begin{enumerate}
+                \item Swing the left arm in a way that the pole and ribbon start to swing as well.
+                \item Catch the pole with the right gripper using one of the many sensors that are present in the gripper.
+                \item Make sure the gripper holds the pole well (and that it was caught) and release the ribbon with the left arm.
+                \item Perform a few fast moves with the right arm so that the ribbon forms a certain shape, which is nice to watch.
+           \end{enumerate}
+
+        \subsubsection{Regrasping a rope}
+            The last use case deals with the regrasping of a piece of a rope from one gripper to the other one. The light or proximity sensor should be used to detect the presence of the rope in the gripper. This section should demonstrate that it is indeed possible to swap the functions of both robot arms.
+
+            The proposed scenario is the following. The left gripper holds one end of the rope. The right gripper is open and is positioned towards the left gripper.
+%
+            \begin{enumerate}
+                \item The left arm starts to move towards the right gripper.
+                \item When the presence of the rope is detected inside the right gripper, the motion of the left arm is stopped.
+                \item The right gripper closes, thus holding the other end of the rope.
+                \item The left gripper opens and releases the rope.
+                \item The left arm moves back and the functions of both arms are swapped.
+                \item The whole procedure is repeated again. The right arm now moves towards the left one that catches the rope.
+            \end{enumerate}
+
+
+
+    \subsection{Thesis organization and naming robot arms}
+        The thesis is organized into seven bigger sections -- one section describing the state-of-the-art, four sections for each of the given tasks, one section that describes the implementation and the last section provides conclusions. Each task description contains all the related information -- assignment, analysis, experiments and discussion.
+
+        The two arms of the \CloPeMa\/ robot are called \textit{R1} and \textit{R2}. \textit{R1} is the right arm and \textit{R2} is the left arm from the view of the robot. This naming convention is then used further on in the text.
+
+\clearpage 

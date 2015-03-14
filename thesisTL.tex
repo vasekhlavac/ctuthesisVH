@@ -1,0 +1,105 @@
+\documentclass{ctuthesis}
+%\documentclass[thesis,cz]{ctu}
+
+\usepackage{siunitx} %si units
+\usepackage{array} % for whole bold rows in tables
+\newcolumntype{*}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{^}{>{\currentrowstyle}}
+\newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
+  #1\ignorespaces
+}
+
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{pdfpages}
+\usepackage{listings}
+% \definecolor{lightpurple}{rgb}{0.8,0.8,1}
+\lstset{
+    frame=tb,
+    numbers=left,
+    xleftmargin=2em,
+    % numberstyle=\color{red},
+    % keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    % identifierstyle=\color{black},
+    }
+
+% ------------- Colors abbreviations ------------
+\def\cbl{\color{blue}}
+
+\ctuTitle{Dual-arm robot perceiving and manipulating soft objects -- use cases}
+\ctuAuthor{Tadeáš Lejsek}
+\ctuSupervisor{Václav Hlaváč}
+
+\ctuAbstract{
+    The thesis explores the possibilities of a various sensoric feedback loops that mimic the human visual and tactile sensing in complex robotic manipulation tasks. I developed four use cases that involve various soft object manipulation tasks with the two-arm \CloPeMa\/ robot such as shooting projectiles from a slingshot, tying an overhand knot, catching a swinging gymnastic pole and regrasping a piece of a rope from one robot arm to the another one. These four use cases will enrich the repository of sensing/manipulation skills in \CloPeMa\/ project and beyond it.
+}
+
+\ctuAbstrakt{
+    Diplomová práce zkoumá možnosti užití zpětné vazby, která napodobuje lidský zrak a hmat, a to v komplexních robotických manipulačních úlohách. Vypracoval jsem čtyři případové studie, které se zabývají manipulací s~měkkými objekty pomocí dvourukého robotu \CloPeMa\/ jako je střelba z praku, vázání uzlu, chytání kývající se gymnastické tyče zavěšené na gymnastické stuze a přechytávání lana z jedné robotické ruky do druhé. Tyto čtyři případové studie obohatí souhrn manipulačních a percepčních schopností robotu \CloPeMa\/ v rámci projektu \CloPeMa\/ a budou užitečné i po jeho skončení.
+}
+
+\renewcommand{\cctuAcknowledgementsBody}{
+    I would like to thank my supervisor Václav Hlaváč. His advice given at our regular weekly meetings were highly valuable. His ``top view'' perspective shed new light on many aspects of writing the thesis. My deepest thanks belongs to my direct co-workers at the \CloPeMa\/ project Vladimír Petrík and Libor Wagner. They were always ready to thoroughly answer all of my questions. I have learned a lot from them. I would also like to thank Vladimír Smutný and Pavel Krsek. Vladimír Smutný has been my supervisor even during my high school years when I did several projects for the university. He also guided my pre-diploma work at the \CloPeMa\/ project.
+
+    I would like to thank Marcel who helped me to construct a better slingshot and my friends who participated in making the knot-tying videos. I would also like to thank Tereza Köppelová, a rhythmic gymnast, who showed me how to manipulate the ribbon. I am very thankful to Jéňa who can answer every imaginable question about image processing and who always had time for me and Ondra with whom I could always talk about programming in Python. I would also like to express my gratitude towards my fiancée Bára for her patience. I am very thankful to my parents who always encouraged me to study and even created the conditions that allowed me to study abroad. Last but not least, I would like to thank all of my friends and family members who were always interested in what I am doing and were always eager to see the new videos that I made.
+
+    }
+
+
+\def\Cplusplus{C\raisebox{0.5ex}{\tiny\textbf{++}}}
+
+\providecommand{\CloPeMa}{\emph{CloPeMa}}
+
+
+% \includeonly{Src/01intro}
+%\includeonly{Src/02SOTA}
+% \includeonly{Src/03slingshot}
+% \includeonly{Src/04tyer}
+% \includeonly{Src/05ribbon}
+% \includeonly{Src/regrasping}
+% \includeonly{Src/06conclusions}
+% \includeonly{Src/implementation}
+% \includeonly{Src/07appendix}
+
+\begin{document}
+\rhead{Soft objects manipulation and perception} % Shorter title - no overlapping in the heads of the pages
+
+% CTU pages
+\include{Src/00ctu}
+
+% Introduction
+\include{Src/01intro}
+
+% State-of-the-art
+\include{Src/02SOTA}
+
+% Slingshot
+\include{Src/03slingshot}
+
+% Knot tying
+\include{Src/04tyer}
+
+% Ribbon
+\include{Src/05ribbon}
+
+% Regrasping
+\include{Src/regrasping}
+
+% Implementation
+\include{Src/implementation}
+
+% Conclusions
+\include{Src/06conclusions}
+
+\bibliography{biblio}
+\bibliographystyle{ieeetr}
+\clearpage
+
+% Appendix
+\include{Src/07appendix}
+
+\end{document} 

@@ -1,0 +1,81 @@
+\graphicspath{{Img/implementation/}}
+\section{Implementation}
+     I programmed all the needed scripts and algorithms in Python 2.7.3 \cite{Python}. The communication with the various installed sensors was done through \emph{Robotic Operating System} (ROS) \cite{ROS2009}. I used the \emph{Moveit!} package to control the movements of the robot \cite{moveit}.
+
+    \subsection{How to run the code}
+        The following manual is applicable for the PC's at the \CloPeMa\/ laboratory. The required operating system is Ubuntu 12.04 with installed ROS Hydro.
+
+        To launch the \CloPeMa\/ Rviz 3D Visualization Tool~\ref{fig:rviz}, run the following code in the console.
+
+        \begin{lstlisting}[language=bash, label={lst:StartClopema}]
+roscore
+roslaunch clopema_launch start_robot.launch
+        \end{lstlisting}
+
+        \begin{figure}[h]
+        \includegraphics[width=0.5\textwidth]{rviz.png}
+        \centering
+        \caption{Rviz 3D Visualization Tool.}
+        \label{fig:rviz}
+        \end{figure}
+
+
+        There is a Moveit! plugin, so one can move the robotic arms simply by dragging them in the visualization.
+
+        The code that I wrote can be found in the \textit{clopema\_compliance\_2} package. Type the following to the console to navigate to the corresponding folder.
+                \begin{lstlisting}[language=bash, numbers=none]
+roscd clopema_compliance_2
+                \end{lstlisting}
+
+
+        The main code for the four tasks consists of four classes each placed in a separate module (class Shooter in shooter2.py for the slingshot, Tyer in tyer2.py for the knot-tying, Pendulum in pendulum2.py for the rhythmic gymnastics and Regrasper in regrasper.py for the regrasping). Each file contains a main() method that starts the main sequence for that particular module. I prepared the so called launch files that are used not only to start the main method, but also to launch all the required sensors. They are called \textit{shooter.launch}, \textit{tyer.launch}, \textit{pendulum.launch} and \textit{regrasper.launch}. To run the launch file, type:
+
+                \begin{lstlisting}[language=bash, numbers=none]
+roslaunch clopema_compliance_2 *.launch
+                \end{lstlisting}
+
+        If you wish to inspect and run the different methods of the classes separately, use the \textit{IPython} console. There are four test files that only initialize an instance of that particular class. One can then run the different methods one by one. The following code is an example for the \textit{Regrasper} class.
+
+
+                \begin{lstlisting}[language=bash, numbers=none]
+# First navigate to the corresponding folder.
+ipython # Start the IPython console.
+
+# Initialize an instance of Regrasper class.
+run regrasper2_test.py
+
+# Then run the different methods individually, for example:
+r.init() # The robot moves to the initial position.
+r.insert_rope_left() # Insert the rope to the left gripper.
+r.grasp_left() # Regrasp the rope.
+                \end{lstlisting}
+
+        Note that you will have to start all the required sensors manually.
+
+              \begin{lstlisting}[language=bash, numbers=none]
+roslaunch clopema_launch force_sensors.launch # Start both force sensors.
+roslaunch clopema_launch xtion1.laucnh # Start the xtion sensor in the r1 arm.
+                \end{lstlisting}
+
+        The documentation for all four modules can be found in the Use Cases Reference in Appendix~\ref{sec:appendix} or on the attached CD.
+
+
+
+    \subsection{Description of the developed reusable code}
+        I successfully implemented a few classes (I call them managers) in Python that simplify the work with the \CloPeMa\/ robot and that are made to be used by others as well. These classes build on top of the \CloPeMa\/ testbed and provide more advanced functionality.
+
+        \emph{MoveManager} covers many areas that are connected with controlling the movements of the robot arms. There are functions available for moving the arm along a straight line and for turning only one joint. Furthermore, there are functions that enable computing distance between the different coordinate systems of the robot and for transforming poses using the axis-angle notation.
+
+        \emph{GripperManager} covers the operation of the robot gripper. One can set its closing speed. Not only can one open and close the gripper fully, but there are functions that enable partial opening as well.
+
+        \emph{ForceManager} provides the functionality connected with the force sensor. One can stop the motion of the robot arm or open/close the gripper, if the measured force exceeds a certain threshold.
+
+        \emph{CameraManager} provides the functionality connected with the Kinect sensor. There are function to obtain either the RGB or depth image of the scene. The algorithm for finding connected components is implemented in this module.
+
+        \emph{ProximityManager} provides functions connected with the light and proximity sensors that are placed in the grippers. It can be used for closing the gripper, if the output of the light or proximity sensor exceeds a certain threshold.
+
+        I also generated a documentation that contains the most used methods as well as a short description of the developed modules. Below is an excerpt taken from the automatically generated documentation describing the managers. The detailed description for the developed methods and classes can be found in the Manager Reference in Appendix~\ref{sec:appendix}. The full generated documentation in pdf and in HTML can be found on the attached CD.
+
+        
+
+    \includepdf[pages={5-6}]{Src/clopema_compliance.pdf}

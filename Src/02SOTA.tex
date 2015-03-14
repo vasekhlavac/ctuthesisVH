@@ -1,0 +1,112 @@
+\graphicspath{{Img/SOTA/}}
+
+\section{State-of-the-art}
+
+    \subsection{General}
+A tactile feedback is useful for perceiving and manipulating soft objects. Its usage dates back to at least 1987 when Stephen Buckley, USA published his PhD on planning and teaching compliant motion strategies \cite{Buckley1987Insertion}. He was for instance interested in scenarios, in which a robot holds a T-shaped piece that has to be inserted into a corresponding hole. He worked with a robotic arm capable of Cartesian motions, but not rotations. The robot arm was modeled as a damped spring. A method how to teach the robot the wanted motions was developed.
+
+Another example of the usage of the tactile feedback is a task where a human guides a robotic arm by hand. It was implemented at Weiss Robotics, Germany \cite{Weissrobotics} (see Figure~\ref{fig:CompliantMotion}, left side). Such scenario might be very useful in industry and other areas. A human can teach the robot a certain motion quickly without the need to specifically program it.
+
+        \begin{figure}[h]
+            \centering
+            \begin{tabular}{cc}
+            \includegraphics[height=0.3\textwidth]{WeissRobotics.png}
+            %
+            &
+            %
+            \includegraphics[height=0.3\textwidth]{CompliantMotion.png}
+            \end{tabular}
+            \caption{Left: Manually guiding the robot arm by hand at Weiss Robotics. Right: Manually guiding the robot arm by hand at \CloPeMa\/.}
+            \label{fig:CompliantMotion}
+        \end{figure}
+
+        In case the force sensor is not placed at the tip of the robot arm, the weight of everything that is placed below the force sensor has to be subtracted in order to get a correct force/torque measurement. This procedure of separating the weight caused by inertia from the influences of the environment (e.g. a human hand) is described in \cite{2006Kroger6DForceSensorFusionIROS}. The same procedure is used in case of the \CloPeMa\/ robot, where force/torque sensors are placed in both wrists \cite{KubesForceSensor}. Together with my college Jan Kubeš, we implemented the manual guidance of the robot arm at the \CloPeMa\/ robot \cite{PreDiplomaLejsekHlavac}. The experiment was recorded on video \cite{ClopemaCompliantMotionKubesLejsek} and is shown in Figure~\ref{fig:CompliantMotion}, right side.
+
+        Another field where a tactile/haptic feedback is used is surgery. A robotic simulator using virtual force feedback was designed at Intelligent Robotics Institute, China \cite{syed2011maxillofacial}. A human surgeon should already be well trained when performing a complicated maxillofacial surgery. For this reason, a platform featuring a 6-DOF robotic arm, haptic and visual feedback was developed to help to train young surgeons.
+
+        A field in which the tactile feedback would be beneficial is the autonomous garment folding (see Figure~\ref{fig:ClopemaFoldingTShirt}). The present solution developed in the course of the \CloPeMa\/ project predominantly utilizes the visual feedback. The usage of the tactile feedback in \CloPeMa\/ testbed is planned for the future~\cite{stria2014garment}.
+
+        \begin{figure}[h]
+        \includegraphics[width=0.4\textwidth]{ClopemaFoldingTShirt.png}
+        \centering
+        \caption{The \CloPeMa\/ robot folding a T-shirt.}
+        \label{fig:ClopemaFoldingTShirt}
+        \end{figure}
+
+        A compliant robot arm can also be made cheaply. The reduction of price was achieved through several choices such as not using an expensive robot head and using stepper motors \cite{quigley2011low}. The arm is capable of playing chess (via teleoperation) and making pancakes (see Figure~\ref{fig:RobotPancakes}).
+
+        \begin{figure}[h]
+        \includegraphics[width=0.4\textwidth]{RobotPancakes.png}
+        \centering
+        \caption{The 7-DOF compliant robot arm making pancakes.}
+        \label{fig:RobotPancakes}
+        \end{figure}
+
+    \subsection{Slingshot}
+        As far as I know, nobody else has used a two-arm robot for experimenting with a slingshot.
+        However, other scenarios have been explored.
+
+        One example is the ``David and Goliath'' slingshot (see Figure~\ref{fig:DavidsSlingshot}). The projectile (a stone) is thrown using a rotating slingshot. The ``robotic'' realization was implemented at University of Pisa, Italy, 2011. It can be seen in the video \cite{DavidLikeSlingshot}.
+
+        \begin{figure}[h]
+        \includegraphics[width=0.5\textwidth]{DavidsSlingshot.png}
+        \centering
+        \caption{The principle of the rotating slingshot.}
+        \label{fig:DavidsSlingshot}
+        \end{figure}
+
+
+        Another example is the ``Trebuchet'' scenario. This principle was used in siege machines in antiquity. Its realization in robotics is shown in \cite{Trebuchet} made by Lake Area Technical Institute (USA) students.
+
+        Finally, another scenario uses the principle of two fast rotating disk. When a projectile (in this case a ball) gets in between them, it is shot forwards. The realization was done by Team 5353, Fremont, USA \cite{TwoRotatingDisks}.
+
+    \subsection{Knot-tying}
+        
+        \begin{figure}[h]
+        \includegraphics[width=0.5\textwidth]{PR2Knot.png}
+        \centering
+        \caption{The PR2 robot tightening a knot at UC Berkeley.}
+        \label{fig:PR2Knot}
+        \end{figure}
+
+        Knot tying was  done for instance in UC Berkeley, USA. They used the Willow Garage PR2 robot and their working scenario was the following. A rope was lying on the table, the robot sensed it, planed how to tie the knot and finally made a simple overhand knot while the rope was still lying on the table (see Figure~\ref{fig:PR2Knot}). The whole process involves only one arm of the two-arm robot. Both arms were used only at the end of the whole procedure to tighten the knot. The rope was segmented based on its color. The robot was taught by a human guidance beforehand~\cite{UCBerkeleyOverhandKnotArticle}. The whole procedure is shown in the video~\cite{UCBerkeleyOverhandKnotVideo}.
+
+        Another working scenario is to entirely omit the need to regrasp the string by using so called fixtures (knot boxes). Such work was done at Darthmouth College, Hannover, Germany \cite{FixtureKnotTying}.
+
+        A great benefit from autonomous knot tying would be in Minimally Invasive Surgery (MIS).  Long Short-Term Memory neural networks were trained using supervised learning to autonomously tie suture knots on a surgical robot (see Figure~\ref{fig:SutureKnot}) \cite{SutureKnotTying}. This work was done in cooperation of Technical University Munich, Germany and Istituto Dalle Molle di Studi sull’Intelligenza Artificiale (IDSIA), Switzerland.
+
+        \begin{figure}
+        \includegraphics[width=0.35\textwidth]{SutureKnot2.png}
+        \centering
+        \caption{The suture knot.}
+        \label{fig:SutureKnot}
+        \end{figure}
+
+
+    \subsection{Ribbon manipulation}
+        To the best of my knowledge, nobody has used a two-arm robot for a manipulation with a modern gymnastic ribbon.
+
+        \begin{figure}[h]
+        \includegraphics[width=0.4\textwidth]{Justine.png}
+        \centering
+        \caption{The Rollin' Justin Robot catching a ball.}
+        \label{fig:Justine}
+        \end{figure}
+
+        However, scenarios where a robotic arm catches a flying object, e.g. a ball are being researched as this setup is used as a benchmark for key robotic technologies. An example is the work done at DLR Institute for Planetary Research, Germany. A high speed 7-DOF robotic arm is used for ball catching. The whole system has to meet hard real-time operation deadlines and thus a lot of computational power is needed (a cluster with 32 CPU cores). The catch rate is reported to be > 80\%, the visual sensing being the weakest point of the whole system \cite{FastBallCatching}. The arm is a part of Rollin' Justin Robot \cite{FastBallCatchingVideo} (see Figure~\ref{fig:Justine}).
+
+        Fast and repeatable motions are needed in the industry. The example of that is a demo made by ABB robotics \cite{CanChallengeVideo}.
+
+    \subsection{Grasping objects}
+        Robotic object grasping is a complex topic. It was studied for instance at Carnegie Mellon University, Pennsylvania, USA \cite{kazemi2012robust}. The authors showed in 2011 that in order to develop a robust grasping of relatively small objects such as pens, screwdriver, cellphones and hammers, the robotic fingers should come in touch and make use of the supporting surface.
+
+        A Mobile Manipulator that is able to autonomously fetch an object lying on a flat surface was developed in 2010 at Georgia Institute of Technology \cite{jain2010assistive}. The aim is to improve the everyday life of elderly, injured or disabled people (see Figure~\ref{fig:AssistiveManipulator}). A tilting laser range finder is used to acquire 3D point cloud data around the surroundings of the object to be fetched.
+
+        \begin{figure}[h]
+        \includegraphics[width=0.4\textwidth]{AssistiveManipulator.jpg}
+        \centering
+        \caption{The mobile manipulator, EL-E, delivering an object to a patient.}
+        \label{fig:AssistiveManipulator}
+        \end{figure}
+
+\clearpage 
